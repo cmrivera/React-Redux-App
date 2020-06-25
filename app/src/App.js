@@ -1,5 +1,5 @@
 import React from "react";
-import BreweryList from "./components/listOfBreweries";
+import ListOfBreweries from "./Components/listOfBreweries";
 import { CssBaseline, Container } from "@material-ui/core";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <CssBaseline>
       <Container>
         <div className="App">
-          <BreweryList />
+          <ListOfBreweries />
         </div>
       </Container>
     </CssBaseline>

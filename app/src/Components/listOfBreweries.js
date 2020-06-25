@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { getBreweries } from "../actions";
+import { getBreweries } from "../Actions/actionsIndex";
 import { TextField, Button, makeStyles } from "@material-ui/core";
 import Brewery from "./Brewery";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BreweryList = (props) => {
+const ListOfBreweries = (props) => {
   const classes = useStyles();
   const [cityName, setCityName] = useState("");
   console.log(props.breweries);
@@ -92,4 +92,4 @@ const mapStateToProps = (state) => ({
   isFetching: state.isFetching,
 });
 
-export default connect(mapStateToProps, { getBreweries })(BreweryList);
+export default connect(mapStateToProps, { getBreweries })(ListOfBreweries);

@@ -2,7 +2,7 @@ import {
   FETCH_BREWERIES_FAILURE,
   FETCH_BREWERIES_START,
   FETCH_BREWERIES_SUCCESS,
-} from "../actions";
+} from "../Actions/actionsIndex";
 
 const initialState = {
   isFetching: false,
