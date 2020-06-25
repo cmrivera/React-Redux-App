@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+//import { connect } from "react-redux";
+//above removed, below added for stretch react hooks
+import { useDispatch, useSelector } from "react-redux";
 import { getBreweries } from "../Actions/actionsIndex";
 import { TextField, Button, makeStyles } from "@material-ui/core";
 import Brewery from "./Brewery";
@@ -36,12 +38,15 @@ const useStyles = makeStyles({
 });
 
 const ListOfBreweries = (props) => {
+  const { breweries, error, isFetching } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const [cityName, setCityName] = useState("");
   console.log(props.breweries);
   const fetchBreweries = (e) => {
     e.preventDefault();
-    props.getBreweries(cityName);
+    dispatch(getBreweries(cityName));
     setCityName("");
   };
 
@@ -51,7 +56,7 @@ const ListOfBreweries = (props) => {
 
   return (
     <div className={classes.root}>
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={fetchBreweries}>
         <h1 className={classes.title}>Brewery Finder</h1>
         <TextField
           type="text"
@@ -61,6 +66,7 @@ const ListOfBreweries = (props) => {
           onChange={handleChange}
         ></TextField>
         <Button
+          type="submit"
           className={classes.button}
           variant="contained"
           color="primary"
@@ -69,15 +75,15 @@ const ListOfBreweries = (props) => {
           Get Breweries
         </Button>
       </form>
-      {props.error && <p className={classes.error}>{props.error}</p>}
-      {props.isFetching ? (
+      {props.error && <p className={classes.error}>{error}</p>}
+      {isFetching ? (
         <div className={classes.loader}>
           <h2>Loading</h2>
           <Loader type="Grid" color="#00BFFF" height={80} width={80} />
         </div>
       ) : (
         <div className={classes.root}>
-          {props.breweries.map((brewery) => {
+          {breweries.map((brewery) => {
             return <Brewery key={brewery.id} brewery={brewery} />;
           })}
         </div>
@@ -85,11 +91,14 @@ const ListOfBreweries = (props) => {
     </div>
   );
 };
+//changed below for stretch
 
-const mapStateToProps = (state) => ({
+/*const mapStateToProps = (state) => ({
   breweries: state.breweries,
   error: state.error,
   isFetching: state.isFetching,
 });
 
-export default connect(mapStateToProps, { getBreweries })(ListOfBreweries);
+export default connect(mapStateToProps, { getBreweries })(ListOfBreweries);*/
+
+export default ListOfBreweries;

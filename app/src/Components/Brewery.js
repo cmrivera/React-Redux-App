@@ -8,6 +8,7 @@ const useStyles = makeStyles({
     width: "25%",
     padding: "2rem 1%",
     margin: "1%",
+    background: "linear-gradient(green,lightblue)",
   },
   title: {
     textDecoration: "none",
